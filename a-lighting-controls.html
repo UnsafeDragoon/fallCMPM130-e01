@@ -24,23 +24,14 @@
       { name: "Teal", color: "#248a87" },
     ];
     let colorIndex = 0;
-    let updates_enabled = true;
     const colorLabel = document.querySelector("#label");
     const colorBody = document.querySelector("#cBody");
-
-    console.log(colorBody);
     
     function update() {
-      if (updates_enabled) {
-        let newColor = colorCatalogue[0];
-        for (let i = 0; i < colorCatalogue.length; i++) {
-          if (i === colorIndex) newColor = colorCatalogue[i];
-        }
+        let newColor = colorCatalogue[colorIndex];
+
         colorLabel.textContent = newColor.name;
         colorBody.style.backgroundColor = newColor.color;
-      } else {
-        console.log("ignored update while updates are disabled");
-      }
     }
 
     document.querySelector("#next").addEventListener("click", () => {
