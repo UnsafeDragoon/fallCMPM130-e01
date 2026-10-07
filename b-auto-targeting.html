@@ -40,16 +40,15 @@
       let target = null;
       // Pick the living enemy with the greatest CURRENT health.
       for (const enemy of enemies) {
-        // If health is zero, that enemy is not alive.
-        if (enemy.health <= 0)
-        {
+        // Dead enemies are disqualified
+        if (enemy.health <= 0){
           continue;
         }
-        // Keep the earliest enemy if two have equal health.
-          if (target && target.health > enemy.health) {
-          continue;
-          }
+        // Prioritize the enemy with higher health
+        // Ties result in newest enemy
+        if (!target || target.health <= enemy.health) {
           target = enemy;
+        } 
       }
       return target;
     }
