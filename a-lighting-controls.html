@@ -15,8 +15,8 @@
   <h1>Color carousel</h1>
   <p>Three old stage-light presets. Try both directions and wrap around.</p>
   <div class="panel"><div id="cBody" aria-hidden="true"></div><strong id="label" aria-live="polite"></strong></div>
-  <button id="previous" type="button">Previous</button>
-  <button id="next" type="button">Next</button>
+  <button id="previous" type="button" onclick="update(-1)">Previous</button>
+  <button id="next" type="button" onclick="update(1)">Next</button>
   <script>
     const colorCatalogue = [
       { name: "Amber", color: "#e6a23c" },
@@ -27,22 +27,15 @@
     const colorLabel = document.querySelector("#label");
     const colorBody = document.querySelector("#cBody");
     
-    function update() {
+    function update(offset) {
+        colorIndex = (colorIndex + offset + colorCatalogue.length) % colorCatalogue.length;
+        
         let newColor = colorCatalogue[colorIndex];
-
         colorLabel.textContent = newColor.name;
         colorBody.style.backgroundColor = newColor.color;
     }
 
-    document.querySelector("#next").addEventListener("click", () => {
-      colorIndex = (colorIndex + 1) % colorCatalogue.length;
-      update();
-    });
-    document.querySelector("#previous").addEventListener("click", () => {
-      colorIndex = (colorIndex - 1 + colorCatalogue.length) % colorCatalogue.length;
-      update();
-    });
-    update();
+    update(0);
   </script>
 </body>
 </html>
